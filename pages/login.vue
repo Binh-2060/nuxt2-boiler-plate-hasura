@@ -47,9 +47,10 @@
 </template>
 
 <script>
-import swal from 'sweetalert2'
+import mainMixin from '@/mixins/main'
 export default {
   layout: 'no-nav',
+  mixins: [mainMixin],
   data() {
     return {
       email: '',
@@ -71,23 +72,21 @@ export default {
     async loginForm() {
       const valid = await this.$refs.form.validate()
 
-      if (valid) {
-        this.loading = true
-        await this.$fire.auth
-          .signInWithEmailAndPassword(this.email, this.password)
-          .then((res) => {
-            this.$router.push({
-              path: '/',
-            })
-          })
-          .catch((e) => {
-        
-          })
-          .finally(() => {
-            this.loading = false
-          })
+      try {
+        if (valid) {
+          this.loading = true
+          await this.$fire.auth.signInWithEmailAndPassword(
+            this.email,
+            this.password
+          )
+          //FUNCTION FROM MIXIN
+          this.changePathWithHref('/')
+        }
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.loading = false
       }
-
     },
   },
 }

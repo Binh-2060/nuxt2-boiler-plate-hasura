@@ -7,8 +7,14 @@
       </v-card>
       <v-card>
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          Nuxt.js + Vuetify + Connect with Hasura Or Apollo client boiler plate
+          template
         </v-card-title>
+
+        <v-card-text>
+          Testing Locales change
+          {{ $t('hello') }}
+        </v-card-text>
         <v-card-text>
           <p>
             Vuetify is a progressive Material Design component framework for

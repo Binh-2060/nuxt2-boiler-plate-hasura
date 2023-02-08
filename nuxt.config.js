@@ -1,9 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - nuxt2-boiler-hasura',
+    titleTemplate: '%s',
     title: 'nuxt2-boiler-hasura',
     htmlAttrs: {
       lang: 'en',
@@ -17,24 +16,41 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '@/plugins/set_token.js', mode: 'client' }],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
-    '@nuxtjs/pwa',
+  plugins: [
+    { src: '@/plugins/set_token.js', mode: 'client' },
+    {
+      src: '@/plugins/intitial_app.js',
+      mode: 'client',
+    },
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/firebase', '@nuxtjs/apollo'],
+  components: true,
+
+  buildModules: ['@nuxtjs/vuetify', '@nuxtjs/pwa'],
+
+  modules: ['@nuxtjs/firebase', '@nuxtjs/apollo', '@nuxtjs/i18n'],
+
+  i18n: {
+    // fallbackLocale: 'en',
+    locales: [
+      {
+        code: 'en',
+        file: 'en.json',
+        name: 'English',
+      },
+      {
+        code: 'lo',
+        file: 'lo.json',
+        name: 'ພາສາລາວ',
+      },
+    ],
+    strategy: 'no_prefix',
+    langDir: 'locales/',
+    lazy: false,
+    defaultLocale: 'en',
+  },
 
   apollo: {
     cookieAttributes: {
@@ -42,8 +58,6 @@ export default {
     },
 
     defaultOptions: {
-      // See 'apollo' definition
-      // For example: default query options
       $query: {
         loadingKey: 'loading',
         fetchPolicy: 'no-cache',
@@ -52,7 +66,7 @@ export default {
     },
     clientConfigs: {
       default: {
-        // YOUR ENDPOINT OF YOUR APOLLO CLIENT OR HASURA ENFPOINT
+        // YOUR ENDPOINT OF YOUR APOLLO CLIENT OR HASURA ENDPOINT
         httpEndpoint: 'https://big-baboon-88.hasura.app/v1/graphql',
         wsEndpoint: 'wss://big-baboon-88.hasura.app/v1/graphql',
         tokenName: 'access_token',
@@ -71,18 +85,19 @@ export default {
 
   //FIREBASE INNITAL APP
   firebase: {
-    // YOUR FIREBASE CONFIG 
+    // YOUR FIREBASE CONFIG
     lazy: false,
     config: {
-      apiKey: '',
-      authDomain: '',
-      projectId: '',
-      storageBucket: '',
-      messagingSenderId: '',
-      appId: '',
+      apiKey: 'AIzaSyAt5qx2oIZtXGsmcT-NxsXnxJu1aHf-e-U',
+      authDomain: 'blacklist-242fb.firebaseapp.com',
+      projectId: 'blacklist-242fb',
+      storageBucket: 'blacklist-242fb.appspot.com',
+      messagingSenderId: '1004308029758',
+      appId: '1:1004308029758:web:2ae37a779bc8af6fc90c6f',
     },
     services: {
       auth: {
+        // persistence: 'local',
         initialize: {
           onAuthStateChangedAction: 'onAuthStateChanged',
         },
@@ -94,18 +109,14 @@ export default {
   pwa: {
     workbox: {
       importScripts: ['/firebase-auth-sw.js'],
-      // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
-      // only set this true for testing and remember to always clear your browser cache in development
       dev: process.env.NODE_ENV === 'development',
     },
   },
 
-  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: false,
-      light: true,
+      // dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -129,6 +140,5 @@ export default {
     },
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }
