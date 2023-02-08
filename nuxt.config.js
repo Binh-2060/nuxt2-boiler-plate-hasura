@@ -88,12 +88,12 @@ export default {
     // YOUR FIREBASE CONFIG
     lazy: false,
     config: {
-      apiKey: 'AIzaSyAt5qx2oIZtXGsmcT-NxsXnxJu1aHf-e-U',
-      authDomain: 'blacklist-242fb.firebaseapp.com',
-      projectId: 'blacklist-242fb',
-      storageBucket: 'blacklist-242fb.appspot.com',
-      messagingSenderId: '1004308029758',
-      appId: '1:1004308029758:web:2ae37a779bc8af6fc90c6f',
+      apiKey: '',
+      authDomain: '',
+      projectId: '',
+      storageBucket: '',
+      messagingSenderId: '',
+      appId: '',
     },
     services: {
       auth: {
